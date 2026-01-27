@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "productKey":"mask",
+    "nama": "Face treatment Centella",
+    "harga": "5.000",
+    "gambar": "an.jpg",
+    "badge": "PRODUK UNGGULAN",
+    "zona": "Best Seller",
+    "komposisi": "• Centella Asiatica Powder\n• Kaolin Clay\n• Lavender Powder\n",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20masker%20Centella%20masih%20ready%3F",
+    "linkAbout": "about-cica.html",
+    "isMain": true
+  },
+  {
+    "id": 2,
+    "productKey":"Dabu",
+    "nama": "Jamu Dabu",
+    "harga": "Rp 5.000",
+    "gambar": "c.jpg",
+    "badge": "Daily buoster",
+    "zona": "Daily Buoster",
+    "komposisi": "• Temulawak 35%\n• Jahe Merah 25%\n• Kunyit 20%\n• Pemanis Alami 20%",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Jamu%20DABU%20masih%20ready%3F",
+    "isMain": false
+  },
+  {
+    "id": 3,
+    "productKey":"Focca",
+    "nama": "Jamu Focca",
+    "harga": "Rp 5.000",
+    "gambar": "a.jpg",
+    "badge": "Focus dan Calm",
+    "zona": "Focus dan Calm",
+    "komposisi": "• Daun Centella 35%\n• Jahe 25%\n• Temulawak 20%\n• Pemanis Alami 20%",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Jamu%20FOCCA%20masih%20ready%3F",
+    "isMain": false
+  },
+    {
+    "id": 4,
+    "productKey":"Rareco",
+    "nama": "Jamu Rareco",
+    "harga": "Rp 5.000",
+    "gambar": "a.jpg",
+    "badge": "raga recovery",
+    "zona": "Raga Recovery",
+    "komposisi": "• Jahe Merah 35%\n• Kunyit 25%\n• Temulawak 20%\n• Serai 10%\n• Pemanis Alami 10%",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Jamu%20RARECO%20masih%20ready%3F",
+    "isMain": false
+  }
+  
+]

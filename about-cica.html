@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centella Asiatica - Hidden Gem</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>/* ================= RESET & BASE ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+:root {
+  --eco-main: #1a535c;
+  --eco-accent: #4ecdc4;
+  --eco-soft: rgba(217, 240, 238, 0.6);
+  --paper: rgba(254, 252, 247, 0.7);
+  --text-main: #2e2e2e;
+  --mint:#b9f3e4;
+  --sky:#c8e7ff;
+  --brand-eco:#4ecdc4;
+  --lemon:#fff7a5;
+}
+
+body {
+  color: var(--text-main);
+  background:#e9ecef;
+  line-height: 1.6;
+}
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:92%;max-width:1100px;display:flex;justify-content:space-between;align-items:center;padding:.45rem .9rem;background:rgba(255, 255, 255, 0.85);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.06);z-index:1000;}
+.nav-left h1{margin:0;font-size:1.05rem;font-weight:800;}
+.brand-outline{color: var(--brand-eco); font-weight:800;text-shadow:-1px 0 0 #fff,1px 0 0 #fff,0 -1px 0 #fff,0 1px 0 #fff; letter-spacing:0.8px;}
+
+/* HAMBURGER */
+.hamburger{width:34px;height:26px;padding:4px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;position:relative;}
+.hamburger span{height:3px;background:#222;border-radius:4px;transition:.3s;}
+.hamburger.active span{opacity:0;}
+.hamburger-close{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;opacity:0;pointer-events:none;transition:.2s;}
+.hamburger.active .hamburger-close{opacity:1;}
+
+/* MENU */
+.menu-link {text-decoration:none;
+  color:black;
+}
+.nav-menu{position:fixed;top:20px;right:-320px;width:300px;background:white;padding:20px;border-radius:14px;box-shadow:-6px 8px 28px rgba(0,0,0,.15);transition:.3s;z-index:1200;}
+.nav-menu.open{right:20px;}
+.nav-menu a{display:block;padding:10px 6px;font-weight:700;}
+.menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:800;}
+.menu-close{font-size:1.6rem;cursor:pointer;line-height:1;}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;opacity:0; background:rgba(0,0,0,.25);pointer-events:none;transition:.3s;z-index:1100;}
+.overlay.show{opacity:1;pointer-events:auto;}
+.page {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px 15px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 100px 15px 60px; /* ↑ tambahin padding-top lebih besar dari tinggi navbar */
+}
+
+/* ================= CARD GLASS ================= */
+.card {
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 17px;
+  
+  position: relative;
+}
+/* ================= CARD DARK ================= */
+.card-dark {
+  background: rgba(50, 50, 50, 0.85); /* abu gelap + transparansi */
+  color: #fff; /* teks putih supaya terbaca */
+  border-radius: 22px;
+  padding: 17px;
+  position: relative;
+}
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  text-align: center;
+  padding-top: 45px;
+}.hero-title-badge {
+  font-family: 'Playfair Display', serif;
+
+  background: linear-gradient(
+    to right,
+    rgba(78,205,196,0.85),
+    rgba(0,0,0,0.45)
+  );
+
+  color: white;
+  border: 1px solid var(--lemon);
+  border-radius: 12px;
+
+  padding: 8px 14px;
+
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  /* ⬇️ INI KUNCI UTAMA */
+  white-space: nowrap;          /* PAKSA 1 BARIS */
+  max-width: 92%;               /* biar ga keluar card */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: clamp(17px, 3.6vw, 24px);
+padding: 10px 18px;
+  text-align: center;
+}
+
+
+/* ================= GRID HORIZONTAL (FIXED ALL DEVICE) ================= */
+.grid-2 {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: nowrap;               /* ⬅️ PAKSA HORIZONTAL */
+}
+
+.grid-2 .card {
+  flex: 1 1 50%;                    /* ⬅️ DUA CARD SELALU SEJAJAR */
+  min-width: 0;
+  padding-top: 45px;
+  display: flex;
+  flex-direction: column;
+}
+/* ================= BADGE GLASS ================= */
+.card-badge-small {
+  font-family: 'Playfair Display', serif;
+    background: linear-gradient(to right, rgba(78,205,196,0.85), rgba(0,0,0,0.25)); /* Aqua ke hitam lebih pekat */
+  color:white;
+  border: 1px solid var(--lemon); /* outli
+  box-shadow:0 2px 6px rgba(0,0,0,0.25); /* shadow dasar lebih kuat */
+  backdrop-filter: blur(4px); /* glassmorphism tipis */
+  backdrop-filter: blur(4px); /* glassmorphism tipis */
+  color: white;
+  font-size: clamp(16px, 4vw, 22px);
+  padding: 3px 25px;
+  border-radius: 7px;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;pl
+  text-align: center;
+}
+
+/* ================= CARD SETENGAH TINGGI + SCROLL ================= */
+.card-scroll {
+  max-height: 240px;
+  padding-top: 45px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-scroll-content {
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* scrollbar halus */
+.card-scroll-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-scroll-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+/* ================= SCROLLBAR GLASS + GRADIENT MINT-ABU + HOVER ================= */
+.card-scroll-content::-webkit-scrollbar {
+  width: 8px; /* lebar scrollbar */
+}
+
+.card-scroll-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2); /* transparan glass */
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.card-scroll-content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(185,243,228,0.8), rgba(150,150,150,0.8)); /* mint ke abu */
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.card-scroll-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(185,243,228,1), rgba(150,150,150,1)); /* lebih solid saat hover */
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+}
+
+/* ================= TYPO INSIDE GRID ================= */
+.grid-2 ul {
+  padding-left: 15px;
+  font-size: 0.85rem;
+}
+
+.grid-2 p {
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+/* ================= LIST ILMIAH MODERN ================= */
+.card-lis {    background: linear-gradient(to right, rgba(78,205,196,0.85), rgba(0,0,0,0.75)); /* Aqua ke hitam lebih pekat */
+  color:white;
+  border: 1px solid var(--lemon); /* outli
+  box-shadow:0 2px 6px rgba(0,0,0,0.25); /* shadow dasar lebih kuat */}
+}
+.list-ilmiah-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 20px 15px;
+  box-sizing: border-box;
+}
+
+.list-ilmiah {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-ilmiah .item {
+background:#e9ecef;
+  color: #333; /* teks gelap biar terbaca */
+border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  backdrop-filter: blur(6px);
+}
+
+.list-ilmiah .item h3 {
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.list-ilmiah .item a {
+  font-family: Monstserrat;
+  background: linear-gradient(to right, #4ecdc4, rgba(0,0,0,0.25)); /* Aqua ke hitam lebih pekat */
+  box-shadow:0 2px 4px rgba(0,0,0,1); /* shadow dasar lebih kuat */
+  border-radius: 7px;
+  color:white;
+  border: 1px solid var(--lemon);
+  text-decoration: none;
+  font-size: 22px;
+  text-shadow: 0.5px 0.5px 0.8px rgba(0,0,0,0.25);
+}.list-ilmiah .item p {
+  color: black;
+}
+/* ================= TAMBAH TEKS "Klik Sumber" DI LINK ================= */
+.list-ilmiah .item a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* jarak antara teks link dan teks tambahan */
+}
+
+.list-ilmiah .item a::after {
+  content: "Klik Sumber →";
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: auto; /* push ke kanan */
+  white-space: nowrap;
+}
+/* ================= PRODUCT SLIDER ================= */
+.product-slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
+/* ================= PRODUCT CARD WITH IMAGE ================= */
+.product-card {
+  flex: 0 0 200px;
+    background: linear-gradient(to right, rgba(78,205,196,0.85), rgba(0,0,0,0.45)); /* Aqua ke hitam lebih pekat */
+  color:white;
+  border: 1px solid var(--lemon); /* outli
+  box-shadow:0 2px 6px rgba(0,0,0,0.25); /* shadow dasar lebih kuat */
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+/* container gambar */
+.product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.05);
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* produk tetap proporsional */
+}
+
+/* nama produk */
+.product-card a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* tombol link */
+a.btn-action  {color:black
+}
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  min-height: 38px;
+
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  line-height: 1.2;
+
+  background: white;
+  color: black;
+
+  border: 1px solid var(--lemon);
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  webkit-font-smoothing: antialiased;
+}
+
+
+.product-card .btn-link:hover {
+  background-color: var(--eco-main);
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .grid-2 {
+    gap: 8px;
+  }
+
+  .grid-2 .card {
+    padding: 40px 10px 15px;
+  }
+
+  .card-scroll {
+    max-height: 200px;
+  }
+
+  .list-ilmiah-section {
+    padding: 15px 10px;
+  }
+
+  .list-ilmiah .item {
+    padding: 12px;
+  }
+
+  .product-card {
+    flex: 0 0 160px;
+    font-size: 0.8rem;
+    justify-content: space-between;
+  }
+}
+/* ================= OVERRIDE STYLE NAVBAR & BRAND OUTLINE ================= */
+.nav-left h1 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.8px !important;
+}
+
+.brand-outline {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.8px !important;
+  text-shadow: -1px 0 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, 0 1px 0 #fff !important;
+}
+/* ================= IMAGE PREVIEW OVERLAY ================= */
+#imgPreviewOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+#imgPreviewOverlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  object-fit: contain;
+  cursor: default; /* cursor default di gambar */
+}</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left"><h1>aNNo <span class="brand-outline">ecovera</span></h1></div>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span><span class="hamburger-close">&times;</span></div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="nav-menu" id="navMenu">
+  <div class="menu-header"><span>MENU</span><span class="menu-close" id="menuClose">&times;</span></div>
+  <a href="index.html" class="menu-link">Home</a>
+  <a href="index.html" class="menu-link">Produk</a>
+</div>
+<div class="page">
+  <header class="card hero card-dark">
+    <h1 class="hero-title-badge">Centella Asiatica – Hidden Gem Dunia Tanaman</h1>
+    <p>Temukan tanaman kecil yang jarang dilirik, tapi sudah lama jadi bahan riset dalam dunia herbal dan perawatan kulit. Di sini, kami fokus berbagi info dan produk berbasis Centella Asiatica dengan transparansi dan riset nyata — bukan sekadar tren.</p>
+  </header>
+
+  <div class="grid-2">
+
+    <section class="card card-scroll card-dark">
+      <h2 class="card-badge-small">Apa Itu Centella?</h2>
+      <div class="card-scroll-content">
+        <p>Centella Asiatica, atau yang sering disebut <strong>Pegagan / cica</strong>, adalah tanaman herbal klasik yang sudah lama dipelajari dalam literatur tradisional dan modern. Banyak penelitian menyoroti komponen bioaktif dari batang dan daun tanaman ini, seperti:</p>
+        <ul>
+          <strong><li>Flavonoid</li></strong>
+          <strong><li>Saponin</li></strong>
+          <strong><li>Triterpenoid</li></strong>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card card-scroll card-dark">
+      <h2 class="card-badge-small">Kenapa Menarik?</h2>
+      <div class="card-scroll-content">
+        <ul>
+          <li>Memperluas wawasan tentang bahan alami & herbal.</li>
+          <li>Belajar tentang tanaman yang banyak riset tapi jarang dipakai di produk mainstream.</li>
+          <li>Produk di website ini hadir dengan transparansi.</li>
+          <li>Berbagi literatur ilmiah dan referensi riset.</li>
+          <li>Website ini menawarkan produk berbasis Centella serta edukasinya.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================= LIST ILMIAH FULL WIDTH ================= -->
+  <section class="card list-ilmiah-section card-lis">
+    <h2 style="margin-bottom:15px">Riset & Literatur</h2>
+    <div class="list-ilmiah ">
+      <div class="item ">
+        <h3>Formulation of Body Mask From Gotu Kola Leaf (Centella asiatica L.) for Skin Care</h3>
+        <a href="https://ojs.unud.ac.id/index.php/metamorfosa/article/view/80323">- OJS UNUD -</a>
+        <p>Membahas kandungan bioaktif pada tanaman Centella Asiatica untuk body mask.</p>
+      </div>
+      <div class="item">
+        <h3>Pengaruh Masker Pegagan</h3>
+        <a href="https://jptam.org/index.php/jptam/article/view/18796">- JPTAM -</a>
+        <p>Studi yang meneliti sifat bioaktif daun pegagan untuk 
+        perawatan kulit.</p>
+      </div>
+      <div class="item">
+        <h3>Kelayakan Daun Pegagan Sebagai Bahan Dasar Pembuatan Sabun untuk Kulit Kering</h3>
+        <a href="https://journal.unnes.ac.id/sju/bbhe/article/view/67044">- UNNES Journal -</a>
+        <p>Membahas potensi daun pegagan dalam produk berbasis tanaman.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card card-dark">
+    <h2 style="margin-bottom:15px">Referensi Produk</h2>
+    <div class="product-slider">
+<div class="product-card">
+  <div class="product-img">
+    <img src="drjart.jpg" alt="Dr Jart Cicapair">
+  </div>
+  <a href="https://id.shp.ee/cBgzi67" class="btn-action">Dr.Jart+ Cicapair</a>
+</div>
+
+<div class="product-card">
+  <div class="product-img">
+    <img src="cosrx.jpg" alt="COSRX Toner">
+  </div>
+  <a href="https://id.shp.ee/aJTHLvq" class="btn-action">COSRX Toner</a>
+</div>
+
+<div class="product-card">
+  <div class="product-img">
+    <img src="ampoule.jpg" alt="SKIN1004 Ampoule">
+  </div>
+  <a href="https://id.shp.ee/Z2xdger" class="btn-action">SKIN1004 Ampoule</a>
+</div>
+<div class="product-card">
+  <div class="product-img">
+    <img src="npure.jpg" alt="SKIN1004 Ampoule">
+  </div>
+  <a href="https://id.shp.ee/hRsVfJo" class="btn-action">NPure Centella</a>
+</div>
+    </div>
+  </section>
+
+  <section class="tentang" style="text-align: center;">
+    <h2>Tentang Brand Kami</h2>
+    <p>Fokus pada transparansi dan literatur ilmiah untuk perawatan kulit masa kini.</p>
+    <a href="faq.html" style="flex:1;
+  background: white;
+  color:black;
+  border: 1px solid var(--lemon); /* outline warna lemon */
+  top:15px;
+  padding:6px 15px;
+  text-decoration:none;
+  font-size:18px;
+  border-radius:8px;
+  text-align:center;
+  cursor:pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  position:relative;
+  overflow:hidden;
+  letter-spacing:0.8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.25);
+  backdrop-filter: blur(4px);
+; font-weight: bold;">Telusuri Produk →</a>
+  </section>
+</div><!-- PREVIEW IMAGE OVERLAY -->
+<div id="imgPreviewOverlay" style="display:none;">
+  <img id="imgPreview" src="" alt="Preview Produk">
+</div>
+<script type="text/javascript" charset="utf-8">/* ================= NAV MENU ================= */
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+const overlay = document.getElementById('overlay');
+const menuClose = document.getElementById('menuClose');
+
+hamburger.onclick = () => {
+  navMenu.classList.add('open');
+  overlay.classList.add('show');
+  hamburger.classList.add('active');
+};
+
+const closeMenu = () => {
+  navMenu.classList.remove('open');
+  overlay.classList.remove('show');
+  hamburger.classList.remove('active');
+};
+menuClose.onclick = closeMenu;
+overlay.onclick = closeMenu;
+document.querySelectorAll('#navMenu a').forEach(link => link.addEventListener('click', closeMenu));
+// ================= IMAGE PREVIEW FUNCTION =================
+const productImages = document.querySelectorAll('.product-img img');
+const imgPreviewOverlay = document.getElementById('imgPreviewOverlay');
+const imgPreview = document.getElementById('imgPreview');
+
+productImages.forEach(img => {
+  img.addEventListener('click', (e) => {
+    imgPreview.src = img.src;          // Set image yang diklik
+    imgPreviewOverlay.style.display = 'flex'; // Tampil overlay
+  });
+});
+
+// Klik overlay (bukan gambar) untuk nutup
+imgPreviewOverlay.addEventListener('click', (e) => {
+  if(e.target !== imgPreview){       // Klik bagian luar gambar
+    imgPreviewOverlay.style.display = 'none';
+    imgPreview.src = '';
+  }
+});
+</script>
+</body>
+</html>

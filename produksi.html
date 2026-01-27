@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produksi | aNNo Ecovera</title>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+
+  <style>
+  :root {
+  --eco-main: #1a535c;
+  --eco-accent: #4ecdc4;
+  --eco-soft: rgba(217, 240, 238, 0.6);
+  --paper: rgba(254, 252, 247, 0.7);
+  --text-main: #2e2e2e;
+  --mint:#b9f3e4;
+  --sky:#c8e7ff;
+  --brand-eco:#4ecdc4;
+  --lemon:#fff7a5;
+}
+html, body{
+  height:100%;
+  margin:0;
+}
+
+.page{
+  min-height:100vh;
+  min-height:100dvh; /* browser modern */
+  background:linear-gradient(135deg,var(--sky),var(--mint));
+}
+
+  /* ===== PRODUKSI PAGE ===== */
+  .produksi-wrapper{
+    max-width: 1100px;
+    margin: auto;
+    padding: 1.4rem 1rem 3rem;
+  }
+
+  .page-title{
+    text-align:center;
+    font-weight:900;
+    font-size:1.8rem;
+    margin-bottom:1.6rem;
+  }
+
+  .produksi-card{
+    background: var(--card);
+    backdrop-filter: blur(6px);
+    border-radius: 18px;
+    padding: 1.2rem;
+    box-shadow: 0 8px 22px rgba(0,0,0,.12);
+    margin-bottom: 1.8rem;
+  }
+
+  .produksi-label{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:#ff5a1f;
+    color:white;
+    padding:6px 14px 6px 8px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:.9rem;
+    margin-bottom:1rem;
+  }
+
+  .dot{
+    width:14px;
+    height:14px;
+    background:#e60000;
+    border-radius:50%;
+  }
+
+  .video-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  video{
+    width:100%;
+    border-radius:14px;
+    background:black;
+    box-shadow:0 6px 14px rgba(0,0,0,.25);
+  }
+
+  @media(min-width:640px){
+    .video-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+  }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+  <div class="produksi-wrapper">
+    <div class="page-title">Proses Produksi</div>
+
+    <!-- PANEN -->
+    <div class="produksi-card">
+      <div class="produksi-label">
+        <span class="dot"></span>
+        <span>Panen Pegangan</span>
+      </div>
+
+      <div class="video-grid">
+        <video controls poster="assets/img/thumb-panen.jpg">
+          <source src="assets/video/panen-1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- OLAH -->
+    <div class="produksi-card">
+      <div class="produksi-label">
+        <span class="dot"></span>
+        <span>Olah Pegangan</span>
+      </div>
+
+      <div class="video-grid">
+        <video controls>
+          <source src="assets/video/olah-1.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

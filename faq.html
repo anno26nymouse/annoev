@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - aNNo Ecovera</title>
+  
+  <style>
+    /* VARIABEL WARNA & STYLE DASAR DARI INDEX.HTML */
+    :root {
+      --mint: #b9f3e4;
+      --sky: #c8e7ff;
+      --lemon: #fff7a5;
+      --accent: #8bd3ff;
+      --text-dark: #222;
+      --bg: #eef3f8;
+      --card: rgba(255, 255, 255, 0.8);
+      --brand-eco: #4ecdc4;
+    }
+
+    * { box-sizing: border-box; }
+    
+    html, body { 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Inter', sans-serif; /* Mengikuti hierarki index.html */
+      background:linear-gradient(135deg,var(--mint),var(--sky));
+      color: var(--text-dark); 
+      scroll-behavior: smooth; 
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* NAVBAR & HAMBURGER DARI INDEX.HTML */
+    nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; padding: .45rem .9rem; background: rgba(255, 255, 255, 0.85); border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,.06); z-index: 1000; }
+    .nav-left h1 { margin: 0; font-size: 1.05rem; font-weight: 900; font-family: 'Montserrat'; letter-spacing:.8px;}
+    .brand-outline { color: var(--brand-eco); font-weight: 900; text-shadow: -1px 0 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, 0 1px 0 #fff; letter-spacing: 0.8px; }
+
+    .hamburger { width: 34px; height: 26px; padding: 4px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative; }
+    .hamburger span { height: 3px; background: #222; border-radius: 4px; transition: .3s; }
+    .hamburger.active span { opacity: 0; }
+    .hamburger-close { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; opacity: 0; pointer-events: none; transition: .2s; }
+    .hamburger.active .hamburger-close { opacity: 1; }
+
+    .nav-menu { position: fixed; top: 20px; right: -320px; width: 300px; background: white; padding: 20px; border-radius: 14px; box-shadow: -6px 8px 28px rgba(0,0,0,.15); transition: .3s; z-index: 1200; font-family: 'Montserrat'; }
+    .nav-menu.open { right: 20px; }
+    .nav-menu a { display: block; padding: 10px 6px; font-weight: 700; color: inherit; text-decoration: none; }
+    .menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: 800; }
+    .menu-close { font-size: 1.6rem; cursor: pointer; line-height: 1; }
+    .overlay { position: fixed; inset: 0; opacity: 0; background: rgba(0,0,0,.25); pointer-events: none; transition: .3s; z-index: 1100; }
+    .overlay.show { opacity: 1; pointer-events: auto; }
+
+    /* FLOATING WHATSAPP DARI INDEX.HTML */
+#waFloat{position:fixed;right:20px;bottom:20px;width:64px;height:64px;border-radius:50%;background:#25D366;color:white;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:2000;border:none;cursor:pointer;}
+.blink {animation: blink 1s steps(1) infinite;}
+@keyframes blink {50% { opacity: 0; }}
+#waFloat{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  letter-spacing:1.3px;
+  background: linear-gradient(
+  to right,
+  rgba(78,205,196,0.85),
+  rgba(0,0,0,0.45)
+);
+border: 1px solid var(--lemon);
+}
+#waFloat:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(
+    to right,
+    rgba(78,205,196,0.95),
+    rgba(0,0,0,0.55)
+  );
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+    /* PENYESUAIAN KONTEN ASLI FAQ.HTML */
+    .container {
+        max-width: 420px;
+        margin: 100px auto 40px; /* Ditambah margin atas agar tidak tertutup navbar */
+        padding: 30px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .product-box { width: 220px; height: 220px; background: #fff; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .product-box img { width: 100%; height: 100%; object-fit: cover; }
+    .product-faq-title { text-align: center; font-weight: 800; margin-bottom: 10px; font-family: 'Montserrat'; font-size: 20px; }
+    .product-faq-grid { column-count: 2; column-gap: 12px; }
+
+    .faq-item { break-inside: avoid; margin-bottom: 12px; background: #fff; color: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; }
+    .faq-question { padding: 12px; font-weight: bold; background: linear-gradient(135deg, #f7f7f7, #eaeaea); position: relative; font-family: 'Montserrat'; font-size: 1.05em; }
+    .faq-question::after { content: "▾"; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); transition: transform 0.3s ease; }
+    .faq-answer { max-height: 0; overflow: hidden; padding: 0 12px; transition: max-height 0.4s ease, padding 0.3s ease; font-size: 16px; line-height: 1.7; font-family: 'Inter'; }
+    .faq-item.active .faq-answer { max-height: 200px; padding: 12px; }
+    .faq-item.active .faq-question::after { transform: translateY(-50%) rotate(180deg); }
+    .faq-title { text-align: center; font-size: 1.3em; font-weight: bold; margin-bottom: 15px; font-family: 'Montserrat'; }
+    .badges { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+    .badge { background: #fff; color: #000; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: bold; font-family: 'Montserrat'; }
+    .tabs { display: flex; justify-content: space-between; margin-bottom: 15px; }
+    .tab { flex: 1; margin: 0 4px; padding: 8px; background: #222; color: #fff; border-radius: 8px; text-align: center; cursor: pointer; font-size: 14px; font-family: 'Montserrat'; }
+    .tab.active { background: #fff; color: #000; font-weight: bold; }
+    
+    .hidden { display: none; }
+    footer { text-align: center; padding: 1.5rem; background: white; font-weight: 700; font-family: 'Inter'; }
+
+/* ===== ACCORDION ULTRA SMOOTH – FAQ PRODUK 1 ===== */
+
+.product-faq .faq-item {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: 
+    box-shadow 0.4s cubic-bezier(.4,0,.2,1),
+    transform 0.35s ease;
+}
+
+/* QUESTION */
+.product-faq .faq-question {
+  padding: 16px 18px;
+  background: #fff;
+  color: #222;
+  font-weight: 600;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: 
+    background 0.45s cubic-bezier(.4,0,.2,1),
+    color 0.3s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ICON */
+.product-faq .faq-question::after {
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.6s cubic-bezier(.34,1.56,.64,1);
+  color: #fff6;
+}
+
+
+
+/* ANSWER – DEFAULT (HIDDEN TOTAL) */
+.product-faq .faq-answer {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 18px;
+  background: #fff;
+  color: #111;
+  line-height: 1.6;
+  transition: 
+    height 0.7s cubic-bezier(.4,0,.2,1),
+    opacity 0.45s ease,
+    padding 0.45s ease;
+}
+
+/* ACTIVE */
+.product-faq .faq-item.active .faq-question {
+  background: linear-gradient(135deg, #000, #333);  color: #fff;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+}
+
+/* ICON ROTATE */
+.product-faq .faq-item.active .faq-question::after {
+  transform: translateY(-50%) rotate(180deg);
+  color: #043030;
+}
+
+/* ANSWER ACTIVE */
+.product-faq .faq-item.active .faq-answer {
+  opacity: 1;
+  padding: 16px 18px;
+}
+/* ===== TOMBOL KHUSUS HITAM ===== */
+.product-faq .faq-question.special-black {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* Icon panah ikut putih */
+.product-faq .faq-question.special-black::after {
+  color: #fff;
+}
+
+/* Hover versi tombol hitam */
+.product-faq .faq-question.special-black:hover {
+  background: linear-gradient(135deg, #000, #333);
+  color: #fff;
+}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left"><h1>aNNo <span class="brand-outline">ecovera</span></h1></div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+    <span class="hamburger-close">&times;</span>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="nav-menu" id="navMenu">
+  <div class="menu-header"><span>MENU</span><span class="menu-close" id="menuClose">&times;</span></div>
+  <a href="index.html#home">Home</a>
+  <a href="index.html#produksiCard">Produksi</a>
+</div>
+
+<div class="container">
+    <div class="product-box">
+        <img src="https://via.placeholder.com/400">
+    </div>
+
+    <div class="product-faq">
+        <div class="product-faq-title">FAQ Face treatment Centella</div>
+        <div class="product-faq-grid">
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question special-black">Produk ini berbahan apa ?</div>
+                <div class="faq-answer">Produk ini dibuat dari kaolin clay dan bubuk Centella Asiatica (pegagan) yang kami olah sendiri, dikombinasikan dengan bahan pilihan dari petani lokal.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Apa manfaatnya ?</div>
+                <div class="faq-answer">Produk ini dapat membantu membersihkan pori-pori, menyerap minyak berlebih, menenangkan kulit, serta membantu merawat kulit berjerawat dan kusam.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Untuk kulit apa ?</div>
+                <div class="faq-answer">Cocok untuk kulit berminyak, kombinasi, dan normal. Untuk kulit sensitif, kami sarankan melakukan tes tempel (patch test) terlebih dahulu.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Apakah aman untuk kulit berjerawat ?</div>
+                <div class="faq-answer">Aman untuk kulit berjerawat ringan. Formulasi berbahan alami dan tanpa bahan keras. Untuk kulit sensitif, tetap disarankan tes dulu sebelum pemakaian rutin.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Apakah mengandung bahan kimia ?</div>
+                <div class="faq-answer">Tidak. Produk ini tidak mengandung merkuri, hidroquinon, pewarna sintetis, maupun parfum buatan.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Saran pemakaian ?</div>
+                <div class="faq-answer">Disarankan digunakan 2 kali seminggu untuk hasil yang lebih optimal.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Apakah bisa dipakai cowok dan cewek ?</div>
+                <div class="faq-answer">Ya, masker ini aman digunakan oleh cowok maupun cewek.</div>
+            </div>
+            <div class="faq-item" onclick="toggleProductFaq(this)">
+                <div class="faq-question">Apakah sudah BPOM ?</div>
+                <div class="faq-answer">Saat ini produk kami merupakan produk handmade skala rumahan dan belum terdaftar BPOM, namun dibuat dengan standar kebersihan dan bahan yang aman.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-box">
+        <img src="https://via.placeholder.com/400">
+    </div>
+
+    <div class="faq-section">
+        <div class="faq-title">FAQ Produk Jamu Herbal</div>
+        <div class="badges">
+            <div class="badge">🌿 Herbal Alami</div>
+            <div class="badge">✅ Tanpa Oplosan</div>
+            <div class="badge">🍯 Manis Alami</div>
+        </div>
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('umum', this)">Umum</div>
+            <div class="tab" onclick="showTab('dabu', this)"> Dabu</div>
+            <div class="tab" onclick="showTab('rareco', this)"> Rareco</div>
+            <div class="tab" onclick="showTab('focca', this)"> Focca</div>
+        </div>
+        
+        <div id="dabu" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu DABU?</div>
+                <div class="faq-answer">Jamu DABU adalah jamu herbal modern berbentuk bubuk instan dengan rasa manis alami, diformulasikan sebagai daily booster untuk membantu menjaga stamina, pencernaan, dan kebugaran tubuh sehari-hari.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b>• Temulawak 35%</b><br>• Jahe merah 25%<br>• Kunyit 20%<br>• Pemanis alami 20%</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu DABU?</div>
+                <div class="faq-answer">✔ Membantu menjaga stamina harian<br>✔ Membantu melancarkan pencernaan<br>✔ Mendukung kesehatan liver & metabolisme<br>✔ Mengurangi rasa lelah ringan</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja aktif<br>• Orang yang sering capek ringan<br>• Yang ingin jaga daya tahan tubuh</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu DABU?</div>
+                <div class="faq-answer">• 3–4 kali per minggu, diminum pagi hari.</div>
+            </div>
+        </div>
+
+        <div id="rareco" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu RARECO?</div>
+                <div class="faq-answer">Jamu RARECO adalah jamu herbal pemulih tubuh dengan dominasi jahe merah, dirancang khusus untuk membantu menghangatkan tubuh, mempercepat pemulihan, dan mengurangi rasa pegal setelah aktivitas fisik.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b> • Jahe merah 30%</b><br> • Kunyit 25%<br> • Temulawak 25%<br> • Serai 10%<br> • Pemanis alami 10%</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu RARECO?</div>
+                <div class="faq-answer">✔ Membantu mengurangi pegal & capek<br> ✔ Menghangatkan tubuh<br> ✔ Membantu melancarkan peredaran darah<br> ✔ Mendukung pemulihan stamina<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja lapangan<br> • Olahragawan ringan<br> • Orang yang sering badan pegal & capek<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu RARECO?</div>
+                <div class="faq-answer">• 2-3 kali per minggu.<br>• Diminum setelah aktivitas berat atau malam hari</div>
+            </div>
+        </div>
+
+        <div id="focca" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu FOCCA?</div>
+                <div class="faq-answer">Jamu FOCCA adalah jamu herbal modern dengan dominasi Centella (pegagan) yang diformulasikan untuk membantu menenangkan pikiran, menjaga fokus, dan membantu tubuh lebih rileks secara alami. Cocok diminum saat butuh konsentrasi, kerja mental, atau saat pikiran terasa penat.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b> • Centella (pegagan) 35%</b><br> • Jahe 25%<br> • Temulawak 20%<br> • Pemanis alami 20%<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu FOCCA?</div>
+                <div class="faq-answer">✔ Membantu meningkatkan fokus<br> ✔ Menenangkan pikiran<br> ✔ Membantu mengurangi stres ringan<br> ✔ Mendukung sirkulasi darah ke otak</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja kantoran<br> • Pelajar / mahasiswa<br> • Orang yang sering overthinking ringan</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu FOCCA?</div>
+                <div class="faq-answer">• 2-3 kali per minggu.<br> • Diminum saat butuh fokus atau sore hari</div>
+            </div>
+        </div>
+
+        <div id="umum">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Ini jamu apa sih?</div>
+                <div class="faq-answer">Jamu herbal bubuk instan dengan rasa manis alami dari bahan herbal pilihan.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa bedanya dengan jamu tradisional?</div>
+                <div class="faq-answer">Lebih praktis, rasa lebih ramah di lidah, tanpa menghilangkan manfaat herbal.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manisnya dari apa?</div>
+                <div class="faq-answer">Dari gula aren, kayu manis, atau daun stevia.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Siapa yang boleh minum?</div>
+                <div class="faq-answer">Pria dan wanita dewasa.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aman untuk maag / darah tinggi / diabetes?</div>
+                <div class="faq-answer">Relatif lebih aman karena pemanis alami, tetap sesuaikan kondisi tubuh.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Boleh air dingin?</div>
+                <div class="faq-answer">Boleh, tapi lebih disarankan air hangat.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>CALL US : <i class="fab fa-whatsapp"></i> 083846313448</footer>
+
+<a id="waFloat" 
+   href="https://wa.me/6283846313448?text=Halo%20aNNo%20Ecovera,%20saya%20tertarik%20dengan%20produk%20Anda" 
+   target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a> 
+
+<script>
+/* SCRIPT NAVBAR DARI INDEX.HTML */
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+const overlay = document.getElementById('overlay');
+const menuClose = document.getElementById('menuClose');
+
+hamburger.onclick = () => {
+  navMenu.classList.add('open');
+  overlay.classList.add('show');
+  hamburger.classList.add('active');
+};
+
+const closeMenu = () => {
+  navMenu.classList.remove('open');
+  overlay.classList.remove('show');
+  hamburger.classList.remove('active');
+};
+menuClose.onclick = closeMenu;
+overlay.onclick = closeMenu;
+document.querySelectorAll('#navMenu a').forEach(link => link.addEventListener('click', closeMenu));
+
+/* SCRIPT ASLI FAQ.HTML */
+function toggleProductFaq(item) {
+  const allItems = document.querySelectorAll('.product-faq .faq-item');
+  const answer = item.querySelector('.faq-answer');
+
+  // Tutup item lain (smooth)
+  allItems.forEach(faq => {
+    if (faq !== item && faq.classList.contains('active')) {
+      const ans = faq.querySelector('.faq-answer');
+      faq.classList.remove('active');
+
+      ans.style.height = ans.scrollHeight + "px";
+      requestAnimationFrame(() => {
+        ans.style.height = "0px";
+        ans.style.opacity = 0;
+        ans.style.paddingTop = 0;
+        ans.style.paddingBottom = 0;
+      });
+    }
+  });
+
+  // Toggle item ini
+  if (item.classList.contains('active')) {
+    // Tutup sendiri
+    item.classList.remove('active');
+    answer.style.height = answer.scrollHeight + "px";
+    requestAnimationFrame(() => {
+      answer.style.height = "0px";
+      answer.style.opacity = 0;
+      answer.style.paddingTop = 0;
+      answer.style.paddingBottom = 0;
+    });
+  } else {
+    // Buka
+    item.classList.add('active');
+    const fullHeight = answer.scrollHeight;
+
+    answer.style.height = "0px";
+    answer.style.opacity = 0;
+
+    requestAnimationFrame(() => {
+      answer.style.height = fullHeight + "px";
+      answer.style.opacity = 1;
+      answer.style.paddingTop = "16px";
+      answer.style.paddingBottom = "16px";
+    });
+
+    // Scroll halus ke item
+    setTimeout(() => {
+      item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 200);
+  }
+}
+
+function toggleFaq(el) {
+    const currentItem = el.parentElement;
+    document.querySelectorAll('.faq-section .faq-item').forEach(item => {
+        if (item !== currentItem) item.classList.remove('active');
+    });
+    currentItem.classList.toggle('active');
+}
+
+function showTab(tab, el) {
+    ["umum","dabu","rareco","focca"].forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.classList.add("hidden");
+    });
+    const active = document.getElementById(tab);
+    if (active) active.classList.remove("hidden");
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+</script>
+
+</body>
+</html>
