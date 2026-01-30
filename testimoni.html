@@ -34,6 +34,108 @@
       overflow-x: hidden;
       width: 100%;
     }
+    /* POPUP TESTIMONI - GLASSMORPHISM BRAND */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: .4s ease;
+  backdrop-filter: blur(3px);
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-box {
+  max-width: 340px;
+  width: 88%;
+  padding: 28px 24px;
+  border-radius: 20px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  animation: popScale .4s ease;
+  position: relative;
+}
+
+/* efek glass */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(185, 243, 228, 0.65),
+    rgba(200, 231, 255, 0.55)
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* animasi muncul */
+@keyframes popScale {
+  from { transform: scale(0.85) translateY(10px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.popup-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #222;
+}
+
+.popup-box p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.7;
+}
+
+.popup-btn {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* tombol brand */
+.btn-testi {
+  background: linear-gradient(to right, rgba(78,205,196,0.9), rgba(139,211,255,0.9));
+  color: white;
+  padding: 11px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: .3px;
+  transition: .3s;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.btn-testi:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.btn-lanjut {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.8);
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn-lanjut:hover {
+  background: rgba(255,255,255,0.9);
+}
 
     /* NAVBAR & HAMBURGER DARI FAQ.HTML */
     nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; padding: .45rem .9rem; background: rgba(255, 255, 255, 0.85); border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,.06); z-index: 1000; }
@@ -125,7 +227,44 @@
     }
     @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-    footer { text-align: center; padding: 2rem; background: white; font-weight: 700; font-family: 'Inter'; margin-top: 50px; }
+    footer { text-align: center; padding: 1rem; background: white; font-weight: 700; font-family: 'Inter'; margin-top: 50px; }
+    /* ===== OVERRIDE POPUP TEXT (AMAN, TANPA NGUBAH CSS LAMA) ===== */
+.popup-box h3 {
+  color: #ffffff;
+  font-size: 24px;
+  letter-spacing: 0.4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.popup-box p {
+  color: rgba(255,255,255,0.95);
+  font-size: 19px;
+  line-height: 1.9;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+/* polish glass popup biar lebih kontras tapi nggak lebay */
+.popup-box.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(78, 205, 196, 0.75),
+    rgba(139, 211, 255, 0.65)
+  );
+}
+/* ===== STICKY FOOTER AMAN (TANPA UBAH HTML) ===== */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
   </style>
 </head>
 <body>
@@ -146,6 +285,18 @@
   <a href="faq.html">FAQ</a>
 </div>
 
+<!-- POPUP TESTIMONI GLASS -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box glass">
+    <h3>💬 Bantu kami jadi lebih baik.</h3>
+    <p>Testimoni anda sangat berharga bagi perkembangan aNNo Ecovera :) 
+Hanya butuh 1 menit untuk berbagi pengalaman anda 🙏</p>
+    <div class="popup-btn">
+      <a href="https://forms.gle/https://forms.gle/f84mYRSKxGBgdB1n6" target="_blank" class="btn-testi">Beri Testimoni</a>
+      <button onclick="closePopup()" class="btn-lanjut">Lanjut</button>
+    </div>
+  </div>
+</div>
 <div class="content-wrapper">
     <h2>💬 Testimoni Customer aNNo Ecovera</h2>
     <div id="approvedList"></div>
@@ -265,6 +416,18 @@ function loadTestimoni(url) {
 }
 
 loadTestimoni(approvedURL);
+// POPUP TESTIMONI - GLASS
+const popup = document.getElementById("popupOverlay");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    popup.classList.add("show");
+  }, 900); // muncul halus setelah halaman kebuka
+});
+
+function closePopup() {
+  popup.classList.remove("show");
+}
 </script>
 
 </body>
