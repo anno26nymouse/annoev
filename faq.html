@@ -107,7 +107,7 @@ border: 1px solid var(--lemon);
     .tab.active { background: #fff; color: #000; font-weight: bold; }
     
     .hidden { display: none; }
-    footer { text-align: center; padding: 1.5rem; background: white; font-weight: 700; font-family: 'Inter'; }
+    footer { text-align: center; padding: 1rem; background: white; font-weight: 700; font-family: 'Inter'; }
 
 /* ===== ACCORDION ULTRA SMOOTH – FAQ PRODUK 1 ===== */
 
@@ -152,25 +152,25 @@ border: 1px solid var(--lemon);
 
 /* ANSWER – DEFAULT (HIDDEN TOTAL) */
 .product-faq .faq-answer {
-  height: 0;
+  max-height: 0;
   overflow: hidden;
   opacity: 0;
   padding: 0 18px;
   background: #fff;
   color: #111;
   line-height: 1.6;
-  transition: 
-    height 0.7s cubic-bezier(.4,0,.2,1),
-    opacity 0.45s ease,
-    padding 0.45s ease;
+  transition:
+    max-height .45s ease,
+    opacity .25s ease;
+  will-change: max-height, opacity;
 }
 
 /* ACTIVE */
-.product-faq .faq-item.active .faq-question {
-  background: linear-gradient(135deg, #000, #333);  color: #fff;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+.product-faq .faq-item.active .faq-answer {
+  max-height: 300px; /* cukup untuk isi FAQ */
+  opacity: 1;
+  padding: 16px 18px;
 }
-
 /* ICON ROTATE */
 .product-faq .faq-item.active .faq-question::after {
   transform: translateY(-50%) rotate(180deg);
@@ -199,6 +199,82 @@ border: 1px solid var(--lemon);
   background: linear-gradient(135deg, #000, #333);
   color: #fff;
 }
+.product-stack{
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+  perspective: 1200px;
+}
+
+.product-stack .card{
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  transform: 
+    translateY(var(--y)) 
+    scale(var(--s)) 
+    rotate(var(--r));
+  transition: 
+    transform .45s cubic-bezier(.4,0,.2,1),
+    opacity .35s ease;
+  cursor: pointer;
+}
+
+.product-stack .card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* posisi tumpukan */
+.product-stack .card:nth-child(1){
+  --y: 0px; --s: 1; --r: 0deg;
+  z-index: 3;
+}
+.product-stack .card:nth-child(2){
+  --y: 10px; --s: .95; --r: -2deg;
+  z-index: 2;
+}
+.product-stack .card:nth-child(3){
+  --y: 20px; --s: .9; --r: 3deg;
+  z-index: 1;
+}
+.img-preview{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+  z-index: 3000;
+}
+
+.img-preview.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.img-preview img{
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 14px;
+}
+
+.img-preview .close{
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:32px;
+  color:#fff;
+  cursor:pointer;
+}
   </style>
 </head>
 <body>
@@ -216,12 +292,15 @@ border: 1px solid var(--lemon);
   <div class="menu-header"><span>MENU</span><span class="menu-close" id="menuClose">&times;</span></div>
   <a href="index.html#home">Home</a>
   <a href="index.html#produksiCard">Produksi</a>
+    <a href="testimoni.html">Testimoni</a>
 </div>
 
 <div class="container">
-    <div class="product-box">
-        <img src="https://via.placeholder.com/400">
-    </div>
+   <div class="preview-zone">
+      <div class="product-box">
+    <img src="facetr.jpg" alt="Face-trwatment" id="facetrImg">
+  </div>
+  </div>
 
     <div class="product-faq">
         <div class="product-faq-title">FAQ Face treatment Centella</div>
@@ -261,9 +340,17 @@ border: 1px solid var(--lemon);
         </div>
     </div>
 
-    <div class="product-box">
-        <img src="https://via.placeholder.com/400">
-    </div>
+    <div class="product-stack" id="herbStack">
+  <div class="card active">
+    <img src="img/herb1.jpg" alt="HerbDrink 1">
+  </div>
+  <div class="card">
+    <img src="img/herb2.jpg" alt="HerbDrink 2">
+  </div>
+  <div class="card">
+    <img src="img/herb3.jpg" alt="HerbDrink 3">
+  </div>
+</div>
 
     <div class="faq-section">
         <div class="faq-title">FAQ Produk Jamu Herbal</div>
@@ -386,100 +473,184 @@ border: 1px solid var(--lemon);
 </a> 
 
 <script>
-/* SCRIPT NAVBAR DARI INDEX.HTML */
+/* ===============================
+   NAVBAR SCRIPT
+================================ */
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const overlay = document.getElementById('overlay');
 const menuClose = document.getElementById('menuClose');
 
-hamburger.onclick = () => {
-  navMenu.classList.add('open');
-  overlay.classList.add('show');
-  hamburger.classList.add('active');
-};
+if(hamburger && navMenu && overlay){
+  hamburger.onclick = () => {
+    navMenu.classList.add('open');
+    overlay.classList.add('show');
+    hamburger.classList.add('active');
+  };
 
-const closeMenu = () => {
-  navMenu.classList.remove('open');
-  overlay.classList.remove('show');
-  hamburger.classList.remove('active');
-};
-menuClose.onclick = closeMenu;
-overlay.onclick = closeMenu;
-document.querySelectorAll('#navMenu a').forEach(link => link.addEventListener('click', closeMenu));
+  const closeMenu = () => {
+    navMenu.classList.remove('open');
+    overlay.classList.remove('show');
+    hamburger.classList.remove('active');
+  };
 
-/* SCRIPT ASLI FAQ.HTML */
+  if(menuClose) menuClose.onclick = closeMenu;
+  overlay.onclick = closeMenu;
+  document.querySelectorAll('#navMenu a')
+    .forEach(link => link.addEventListener('click', closeMenu));
+}
+
+/* ===============================
+   FAQ PRODUK (DENGAN LOGIC BARU)
+================================ */
+/* ===============================
+   FAQ PRODUK (LOGIC SESUAI MAU USER)
+================================ */
 function toggleProductFaq(item) {
   const allItems = document.querySelectorAll('.product-faq .faq-item');
-  const answer = item.querySelector('.faq-answer');
+  const defaultItem = allItems[0];
+  const defaultQuestion = defaultItem.querySelector('.faq-question');
 
-  // Tutup item lain (smooth)
+  const clickedQuestion = item.querySelector('.faq-question');
+
+  // Tutup semua kecuali yang diklik
   allItems.forEach(faq => {
-    if (faq !== item && faq.classList.contains('active')) {
-      const ans = faq.querySelector('.faq-answer');
-      faq.classList.remove('active');
-
-      ans.style.height = ans.scrollHeight + "px";
-      requestAnimationFrame(() => {
-        ans.style.height = "0px";
-        ans.style.opacity = 0;
-        ans.style.paddingTop = 0;
-        ans.style.paddingBottom = 0;
-      });
-    }
+    if (faq !== item) faq.classList.remove('active');
   });
 
-  // Toggle item ini
-  if (item.classList.contains('active')) {
-    // Tutup sendiri
-    item.classList.remove('active');
-    answer.style.height = answer.scrollHeight + "px";
-    requestAnimationFrame(() => {
-      answer.style.height = "0px";
-      answer.style.opacity = 0;
-      answer.style.paddingTop = 0;
-      answer.style.paddingBottom = 0;
-    });
+  // Toggle item yang diklik
+  item.classList.toggle('active');
+
+  const isActive = item.classList.contains('active');
+
+  // Reset semua warna dulu
+  allItems.forEach(faq => {
+    faq.querySelector('.faq-question').classList.remove('special-black');
+  });
+
+  if (item === defaultItem) {
+    // Kalau user klik default
+    if (isActive) {
+      defaultQuestion.classList.add('special-black');
+    }
   } else {
-    // Buka
-    item.classList.add('active');
-    const fullHeight = answer.scrollHeight;
-
-    answer.style.height = "0px";
-    answer.style.opacity = 0;
-
-    requestAnimationFrame(() => {
-      answer.style.height = fullHeight + "px";
-      answer.style.opacity = 1;
-      answer.style.paddingTop = "16px";
-      answer.style.paddingBottom = "16px";
-    });
-
-    // Scroll halus ke item
-    setTimeout(() => {
-      item.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }, 200);
+    if (isActive) {
+      // Kalau klik FAQ lain → dia jadi hitam, default putih
+      clickedQuestion.classList.add('special-black');
+    } else {
+      // Kalau diklik 2x (ketutup) → default balik hitam
+      defaultQuestion.classList.add('special-black');
+    }
   }
 }
-
+/* ===============================
+   FAQ UMUM
+================================ */
 function toggleFaq(el) {
-    const currentItem = el.parentElement;
-    document.querySelectorAll('.faq-section .faq-item').forEach(item => {
-        if (item !== currentItem) item.classList.remove('active');
-    });
-    currentItem.classList.toggle('active');
+  const currentItem = el.parentElement;
+  document.querySelectorAll('.faq-section .faq-item').forEach(item => {
+    if (item !== currentItem) item.classList.remove('active');
+  });
+  currentItem.classList.toggle('active');
 }
 
+/* ===============================
+   TAB PRODUK
+================================ */
 function showTab(tab, el) {
-    ["umum","dabu","rareco","focca"].forEach(id => {
-        const section = document.getElementById(id);
-        if (section) section.classList.add("hidden");
-    });
-    const active = document.getElementById(tab);
-    if (active) active.classList.remove("hidden");
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-}
-</script>
+  ["umum","dabu","rareco","focca"].forEach(id => {
+    const section = document.getElementById(id);
+    if (section) section.classList.add("hidden");
+  });
 
+  const active = document.getElementById(tab);
+  if (active) active.classList.remove("hidden");
+
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ===============================
+   STACKED IMAGE SLIDER
+================================ */
+const stack = document.getElementById('herbStack');
+let startX = 0;
+
+if(stack){
+  const rotateStack = () => {
+    const cards = stack.querySelectorAll('.card');
+    if(cards.length > 1){
+      stack.appendChild(cards[0]);
+    }
+  };
+
+  stack.addEventListener('click', rotateStack);
+
+  stack.addEventListener('touchstart', e=>{
+    startX = e.touches[0].clientX;
+  }, { passive:true });
+
+  stack.addEventListener('touchend', e=>{
+    const diff = e.changedTouches[0].clientX - startX;
+    if(Math.abs(diff) > 40) rotateStack();
+  });
+}
+
+/* ===============================
+   IMAGE PREVIEW
+================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const img = document.getElementById('facetrImg');
+  const preview = document.getElementById('imgPreview');
+  const previewImg = document.getElementById('previewImg');
+  const closeBtn = document.querySelector('#imgPreview .close');
+
+  if (img && preview && previewImg) {
+    img.addEventListener('click', () => {
+      previewImg.src = img.src;
+      preview.classList.add('show');
+    });
+
+    preview.addEventListener('click', (e) => {
+      if (e.target === preview || e.target === closeBtn || e.target.classList.contains('close')) {
+        preview.classList.remove('show');
+      }
+    });
+  }
+});
+/* ======== AUTO LAZY LOADING (AMAN UNTUK HALAMAN KAMU) ======== */
+document.addEventListener("DOMContentLoaded", function () {
+
+  const images = document.querySelectorAll("img");
+
+  images.forEach(img => {
+
+    // Jangan timpa kalau sudah ada loading
+    if (img.hasAttribute("loading")) return;
+
+    // === PENGECUALIAN BIAR TAMPILAN TETAP MULUS ===
+
+    // 1) Gambar utama Face Treatment (harus eager biar nggak blank)
+    if (img.id === "facetrImg") {
+      img.setAttribute("loading", "eager");
+      return;
+    }
+
+    // 2) Gambar pertama di stack (paling atas) → eager
+    if (img.closest(".product-stack .card:first-child")) {
+      img.setAttribute("loading", "eager");
+      return;
+    }
+
+    // Sisanya aman dibuat lazy
+    img.setAttribute("loading", "lazy");
+  });
+
+});
+</script>
+<div id="imgPreview" class="img-preview">
+  <span class="close">&times;</span>
+  <img id="previewImg">
+</div>
 </body>
 </html>

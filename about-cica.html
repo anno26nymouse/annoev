@@ -147,7 +147,7 @@ padding: 10px 18px;
   font-family: 'Playfair Display', serif;
     background: linear-gradient(to right, rgba(78,205,196,0.85), rgba(0,0,0,0.25)); /* Aqua ke hitam lebih pekat */
   color:white;
-  border: 1px solid var(--lemon); /* outli
+  border: 1px solid var(--lemon); /* outline*/
   box-shadow:0 2px 6px rgba(0,0,0,0.25); /* shadow dasar lebih kuat */
   backdrop-filter: blur(4px); /* glassmorphism tipis */
   backdrop-filter: blur(4px); /* glassmorphism tipis */
@@ -159,7 +159,7 @@ padding: 10px 18px;
   top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  white-space: nowrap;pl
+  white-space: nowrap;
   text-align: center;
 }
 
@@ -228,7 +228,6 @@ padding: 10px 18px;
   color:white;
   border: 1px solid var(--lemon); /* outli
   box-shadow:0 2px 6px rgba(0,0,0,0.25); /* shadow dasar lebih kuat */}
-}
 .list-ilmiah-section {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
@@ -258,7 +257,7 @@ border-radius: 15px;
 }
 
 .list-ilmiah .item a {
-  font-family: Monstserrat;
+  font-family: 'Montserrat', Sans-Serif;
   background: linear-gradient(to right, #4ecdc4, rgba(0,0,0,0.25)); /* Aqua ke hitam lebih pekat */
   box-shadow:0 2px 4px rgba(0,0,0,1); /* shadow dasar lebih kuat */
   border-radius: 7px;
@@ -327,6 +326,7 @@ border-radius: 15px;
 .product-img img {
   width: 100%;
   height: 100%;
+  object-fit: cover; /* produk tetap proporsional */
   object-fit: cover; /* produk tetap proporsional */
 }
 
@@ -485,12 +485,12 @@ a.btn-action  {color:black
     <h2 style="margin-bottom:15px">Riset & Literatur</h2>
     <div class="list-ilmiah ">
       <div class="item ">
-        <h3>Formulation of Body Mask From Gotu Kola Leaf (Centella asiatica L.) for Skin Care</h3>
+        <h3>Formulation of Body Treatment From Gotu Kola Leaf (Centella asiatica L.)</h3>
         <a href="https://ojs.unud.ac.id/index.php/metamorfosa/article/view/80323">- OJS UNUD -</a>
-        <p>Membahas kandungan bioaktif pada tanaman Centella Asiatica untuk body mask.</p>
+        <p>Membahas kandungan bioaktif pada tanaman Centella Asiatica untuk tubuh.</p>
       </div>
       <div class="item">
-        <h3>Pengaruh Masker Pegagan</h3>
+        <h3>Pengaruh Tanaman Pegagan</h3>
         <a href="https://jptam.org/index.php/jptam/article/view/18796">- JPTAM -</a>
         <p>Studi yang meneliti sifat bioaktif daun pegagan untuk 
         perawatan kulit.</p>
@@ -538,7 +538,7 @@ a.btn-action  {color:black
   <section class="tentang" style="text-align: center;">
     <h2>Tentang Brand Kami</h2>
     <p>Fokus pada transparansi dan literatur ilmiah untuk perawatan kulit masa kini.</p>
-    <a href="faq.html" style="flex:1;
+    <a href="index.html" style="flex:1;
   background: white;
   color:black;
   border: 1px solid var(--lemon); /* outline warna lemon */
@@ -600,6 +600,25 @@ imgPreviewOverlay.addEventListener('click', (e) => {
     imgPreview.src = '';
   }
 });
+/* ====== AUTO LAZY LOADING UNTUK SEMUA GAMBAR ====== */
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll("img").forEach((img, index) => {
+
+    // Jangan timpa kalau sudah ada loading
+    if (!img.hasAttribute("loading")) {
+
+      // Gambar pertama yang kelihatan (above the fold) kita buat eager
+      if (index === 0) {
+        img.setAttribute("loading", "eager");
+      } else {
+        img.setAttribute("loading", "lazy");
+      }
+    }
+  });
+
+});
+
 </script>
 </body>
 </html>

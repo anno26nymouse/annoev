@@ -547,12 +547,12 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, button {
 </div>
 
 <section class="hero" id="home">
-  <img src="y.png" class="hero-logo" id="heroPreview" alt="Logo aNNo Ecovera">
+<img src="y.jpg" class="hero-logo" id="heroPreview" loading="eager">
   <h2>WELCOME to</h2>
   <div class="typing-container"><span id="typed"></span><span class="blink">_</span></div>
   <div class="hero-desc">
     Dari munculnya kesadaran betapa bermanfaatnya bahan alami. Inilah tempat ekosistem mandiri yang menyediakan berbagai produk berbahan alami. Karena yang alami, selalu membuat tenang di hati.  
-    <span class="outline-white"> KEEP ENJOY AND HAPPY.</span>
+    <span class="outline-white"> KEEP ENJOY AND HAPPY:).</span>
   </div>
 </section>
 
@@ -902,7 +902,26 @@ setInterval(() => {
     setTimeout(() => faqFloat.classList.remove('shake'), 400);
   }
 }, 8000);
+/* ========== AUTO LAZY LOADING UNTUK SEMUA GAMBAR ========== */
 
+function applyLazyLoading() {
+  document.querySelectorAll("img").forEach(img => {
+    // Jangan timpa kalau sudah ada
+    if (!img.hasAttribute("loading")) {
+      img.setAttribute("loading", "lazy");
+    }
+  });
+}
+
+/* Jalankan saat halaman pertama kali siap */
+document.addEventListener("DOMContentLoaded", applyLazyLoading);
+
+/* Jalankan lagi setelah produk JSON selesai dimuat */
+const originalLoadProducts = loadProducts;
+window.loadProducts = async function() {
+  await originalLoadProducts();
+  applyLazyLoading(); // 🔥 KUNCI: biar gambar dari JSON juga kena lazy
+};
 </script>
 </body>
 </html>
