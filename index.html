@@ -258,16 +258,15 @@ nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:92%;max-wi
      0 -0.3px 0 #000,
      0  0.3px 0 #000;
 }
+/* Warna default untuk teks 'Herbal Drink' tetap hitam */
+/* Tetap hitam untuk teks "Herbal Drink" */
 .other-products h4[data-product="Dabu"],
 .other-products h4[data-product="Focca"],
-.other-products h4[data-product="Rareco"]{
-  color:Black;
+.other-products h4[data-product="Rareco"] {
+  color: black; 
   text-transform: uppercase;
 }
-.other-products h4[data-product="centella"]{
-  color:var(--brand-eco);
-  text-shadow: -1px 0 #fff, 1px 0 #fff;
-}
+
 .other-products-container{background:linear-gradient(135deg,var(--sky),var(--mint));padding:2rem 1rem;margin-top:2rem;}
 .section-title{text-align:center;font-weight:900;margin-bottom:1rem; font-size:5.5vw;}
 .other-products{display:flex;flex-direction:column;gap:1rem;}
@@ -820,7 +819,11 @@ async function loadProducts() {
             <img src="${p.gambar}" class="product-img" alt="${p.nama}">
             <div style="flex:1">
               <span class="zone">${p.zona}</span>
-        <h4 data-product="${p.productKey}">${p.nama}</h4>
+<h4 data-product="${p.productKey}">
+  ${p.nama.replace(new RegExp(p.productKey, 'gi'), (match) => `<span style="color: ${p.warna || 'black'}">${match}</span>`)}
+</h4>
+
+
               <p>${p.harga}</p>
               <div class="product-actions">
                 <div class="action-row">

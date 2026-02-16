@@ -15,37 +15,40 @@
   {
     "id": 2,
     "productKey":"Dabu",
-    "nama": "HerbDrink Dabu",
+    "nama": "Herbal Drink Dabu",
+       "warna": "#e6a15c",
     "harga": "Rp 5.000",
     "gambar": "edabu.webp",
     "badge": "Daily buoster",
     "zona": "Daily Buoster",
     "komposisi": "• Temulawak 35%\n• Jahe Merah 25%\n• Kunyit 20%\n• Pemanis Alami 20%",
-    "linkWA": "https://wa.me/6283846313448?text=apakah%20HerbDrink%20DABU%20masih%20ready%3F",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Herbal•Drink%20DABU%20masih%20ready%3F",
     "isMain": false
   },
   {
     "id": 3,
     "productKey":"Focca",
-    "nama": "HerbDrink Focca",
+    "nama": "Herbal Drink Focca",
+     "warna": "#9bc7a4",
     "harga": "Rp 5.000",
     "gambar": "efocca.webp",
     "badge": "Focus dan Calm",
     "zona": "Focus dan Calm",
     "komposisi": "• Daun Centella 35%\n• Jahe 25%\n• Temulawak 20%\n• Pemanis Alami 20%",
-    "linkWA": "https://wa.me/6283846313448?text=apakah%20HerbDrink%20FOCCA%20masih%20ready%3F",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Herbal•Drink%20FOCCA%20masih%20ready%3F",
     "isMain": false
   },
     {
     "id": 4,
     "productKey":"Rareco",
-    "nama": "HerbDrink Rareco",
+   "nama": "Herbal Drink Rareco",
+   "warna": "#8b302f",
     "harga": "Rp 5.000",
     "gambar": "erareco.webp",
     "badge": "raga recovery",
     "zona": "Raga Recovery",
     "komposisi": "• Jahe Merah 35%\n• Kunyit 25%\n• Temulawak 20%\n• Serai 10%\n• Pemanis Alami 10%",
-    "linkWA": "https://wa.me/6283846313448?text=apakah%20HerbDrink%20RARECO%20masih%20ready%3F",
+    "linkWA": "https://wa.me/6283846313448?text=apakah%20Herbal•Drink%20RARECO%20masih%20ready%3F",
     "isMain": false
   }
   

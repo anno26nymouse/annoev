@@ -275,6 +275,79 @@ border: 1px solid var(--lemon);
   color:#fff;
   cursor:pointer;
 }
+/* ===== PERBAIKAN FAQ MINUMAN HERBAL ===== */
+/* Target khusus area FAQ minuman herbal, tidak menyentuh .product-faq */
+
+/* 1. Jawaban lebih rapat ke pertanyaan */
+.faq-section .faq-item .faq-answer {
+  margin-top: -4px;        /* tarik ke atas */
+  padding-top: 0;          /* hilangkan padding atas saat tertutup */
+  padding-bottom: 0;
+  line-height: 1.55;       /* lebih rapat dari 1.7 */
+  font-size: 15px;        /* sedikit lebih kecil agar proporsional */
+}
+
+/* 2. Saat aktif (terbuka), atur ulang padding agar tidak terlalu longgar */
+.faq-section .faq-item.active .faq-answer {
+  padding-top: 0;        /* default 12px -> dikurangi jadi 6px */
+  padding-bottom: 12px;    /* sesuaikan, boleh 12px */
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 3. Opsional: rapatkan jarak antar item FAQ */
+.faq-section .faq-item {
+  margin-bottom: 15px;     /* semula mungkin 12px, dikurangi sedikit */
+}
+
+/* 4. Opsional: buat teks lebih nyaman dibaca (kontras, spasi antar paragraf) */
+.faq-section .faq-answer {
+  color: #1e1e1e;         /* hitam lembut, bukan #111 */
+  background: #fefefe;    /* putih bersih, bukan putih polos? */
+  border-radius: 0 0 12px 12px;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  opacity: 0;
+  transition:
+    max-height .45s cubic-bezier(.4,0,.2,1),
+    opacity .3s ease,
+    padding .3s ease;
+}
+
+.faq-section .faq-item.active .faq-answer {
+  max-height: 500px; /* kasih agak tinggi biar aman */
+  opacity: 1;
+  padding: 12px 16px 16px 16px;
+}
+}
+
+/* 5. Perbaiki tampilan daftar (komposisi) agar rapi */
+.faq-section .faq-answer b {
+  font-weight: 650;
+  color: #044b4b;
+}
+
+.faq-section .faq-answer br + b {
+  margin-top: 4px;
+  display: inline-block;
+}
+.faq-section .faq-question {
+  position: relative;
+}
+
+.faq-section .faq-question::after {
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+
+.faq-section .faq-item.active .faq-question::after {
+  transform: translateY(-50%) rotate(180deg);
+}
   </style>
 </head>
 <body>
@@ -311,15 +384,15 @@ border: 1px solid var(--lemon);
             </div>
             <div class="faq-item" onclick="toggleProductFaq(this)">
                 <div class="faq-question">Apa manfaatnya ?</div>
-                <div class="faq-answer">Produk ini dapat membantu membersihkan pori-pori, menyerap minyak berlebih, menenangkan kulit, serta membantu merawat kulit berjerawat dan kusam.</div>
+                <div class="faq-answer">Dengan kaolin clay dan bubuk daun pegagan pilihan, masker ini membantu kulit terasa bersih, lembut, nyaman, dan memberikan pengalaman perawatan wajah yang menyegarkan, serta menjaga kenyamanan kulit setiap kali digunakan.</div>
             </div>
             <div class="faq-item" onclick="toggleProductFaq(this)">
                 <div class="faq-question">Untuk kulit apa ?</div>
-                <div class="faq-answer">Cocok untuk kulit berminyak, kombinasi, dan normal. Untuk kulit sensitif, kami sarankan melakukan tes tempel (patch test) terlebih dahulu.</div>
+                <div class="faq-answer">Cocok digunakan pada berbagai jenis kulit, dengan formulasi lembut untuk kenyamanan penggunaan.</div>
             </div>
             <div class="faq-item" onclick="toggleProductFaq(this)">
-                <div class="faq-question">Apakah aman untuk kulit berjerawat ?</div>
-                <div class="faq-answer">Aman untuk kulit berjerawat ringan. Formulasi berbahan alami dan tanpa bahan keras. Untuk kulit sensitif, tetap disarankan tes dulu sebelum pemakaian rutin.</div>
+                <div class="faq-question">Apakah aman untuk kulit bermasalah ?</div>
+                <div class="faq-answer">Relatif aman karena menggunakan kaolin clay dan bubuk daun pegagan pilihan dengan formulasi lembut, nyaman untuk digunakan sebagai bagian dari perawatan wajah.</div>
             </div>
             <div class="faq-item" onclick="toggleProductFaq(this)">
                 <div class="faq-question">Apakah mengandung bahan kimia ?</div>
@@ -353,7 +426,7 @@ border: 1px solid var(--lemon);
 </div>
 
     <div class="faq-section">
-        <div class="faq-title">FAQ Produk Jamu Herbal</div>
+        <div class="faq-title">FAQ Produk Minuman Herbal</div>
         <div class="badges">
             <div class="badge">🌿 Herbal Alami</div>
             <div class="badge">✅ Tanpa Oplosan</div>
@@ -362,87 +435,18 @@ border: 1px solid var(--lemon);
         <div class="tabs">
             <div class="tab active" onclick="showTab('umum', this)">Umum</div>
             <div class="tab" onclick="showTab('dabu', this)"> Dabu</div>
-            <div class="tab" onclick="showTab('rareco', this)"> Rareco</div>
             <div class="tab" onclick="showTab('focca', this)"> Focca</div>
+            <div class="tab" onclick="showTab('rareco', this)"> Rareco</div>
         </div>
         
-        <div id="dabu" class="hidden">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu DABU?</div>
-                <div class="faq-answer">Jamu DABU adalah jamu herbal modern berbentuk bubuk instan dengan rasa manis alami, diformulasikan sebagai daily booster untuk membantu menjaga stamina, pencernaan, dan kebugaran tubuh sehari-hari.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
-                <div class="faq-answer"><b>• Temulawak 35%</b><br>• Jahe merah 25%<br>• Kunyit 20%<br>• Pemanis alami 20%</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu DABU?</div>
-                <div class="faq-answer">✔ Membantu menjaga stamina harian<br>✔ Membantu melancarkan pencernaan<br>✔ Mendukung kesehatan liver & metabolisme<br>✔ Mengurangi rasa lelah ringan</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
-                <div class="faq-answer">• Pekerja aktif<br>• Orang yang sering capek ringan<br>• Yang ingin jaga daya tahan tubuh</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu DABU?</div>
-                <div class="faq-answer">• 3–4 kali per minggu, diminum pagi hari.</div>
-            </div>
-        </div>
-
-        <div id="rareco" class="hidden">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu RARECO?</div>
-                <div class="faq-answer">Jamu RARECO adalah jamu herbal pemulih tubuh dengan dominasi jahe merah, dirancang khusus untuk membantu menghangatkan tubuh, mempercepat pemulihan, dan mengurangi rasa pegal setelah aktivitas fisik.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
-                <div class="faq-answer"><b> • Jahe merah 30%</b><br> • Kunyit 25%<br> • Temulawak 25%<br> • Serai 10%<br> • Pemanis alami 10%</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu RARECO?</div>
-                <div class="faq-answer">✔ Membantu mengurangi pegal & capek<br> ✔ Menghangatkan tubuh<br> ✔ Membantu melancarkan peredaran darah<br> ✔ Mendukung pemulihan stamina<br></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
-                <div class="faq-answer">• Pekerja lapangan<br> • Olahragawan ringan<br> • Orang yang sering badan pegal & capek<br></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu RARECO?</div>
-                <div class="faq-answer">• 2-3 kali per minggu.<br>• Diminum setelah aktivitas berat atau malam hari</div>
-            </div>
-        </div>
-
-        <div id="focca" class="hidden">
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa itu jamu FOCCA?</div>
-                <div class="faq-answer">Jamu FOCCA adalah jamu herbal modern dengan dominasi Centella (pegagan) yang diformulasikan untuk membantu menenangkan pikiran, menjaga fokus, dan membantu tubuh lebih rileks secara alami. Cocok diminum saat butuh konsentrasi, kerja mental, atau saat pikiran terasa penat.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
-                <div class="faq-answer"><b> • Centella (pegagan) 35%</b><br> • Jahe 25%<br> • Temulawak 20%<br> • Pemanis alami 20%<br></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Manfaat jamu FOCCA?</div>
-                <div class="faq-answer">✔ Membantu meningkatkan fokus<br> ✔ Menenangkan pikiran<br> ✔ Membantu mengurangi stres ringan<br> ✔ Mendukung sirkulasi darah ke otak</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
-                <div class="faq-answer">• Pekerja kantoran<br> • Pelajar / mahasiswa<br> • Orang yang sering overthinking ringan</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Jamu FOCCA?</div>
-                <div class="faq-answer">• 2-3 kali per minggu.<br> • Diminum saat butuh fokus atau sore hari</div>
-            </div>
-        </div>
-
         <div id="umum">
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Ini jamu apa sih?</div>
-                <div class="faq-answer">Jamu herbal bubuk instan dengan rasa manis alami dari bahan herbal pilihan.</div>
+                <div class="faq-question" onclick="toggleFaq(this)">Ini minuman apa sih?</div>
+                <div class="faq-answer">Minuman herbal yang berbahan bubuk instan dengan rasa <b>manis alami</b> dari bahan herbal pilihan.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">Apa bedanya dengan jamu tradisional?</div>
-                <div class="faq-answer">Lebih praktis, rasa lebih ramah di lidah, tanpa menghilangkan manfaat herbal.</div>
+                <div class="faq-question" onclick="toggleFaq(this)">Apa bedanya dengan minuman tradisional?</div>
+                <div class="faq-answer">Lebih praktis, <b>rasa lebih ramah di lidah,</b> tanpa menghilangkan manfaat herbal.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">Manisnya dari apa?</div>
@@ -454,13 +458,91 @@ border: 1px solid var(--lemon);
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">Aman untuk maag / darah tinggi / diabetes?</div>
-                <div class="faq-answer">Relatif lebih aman karena pemanis alami, tetap sesuaikan kondisi tubuh.</div>
+                <div class="faq-answer"><b>Relatif</b> lebih aman karena pemanis alami, tetap sesuaikan kondisi tubuh.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">Boleh air dingin?</div>
                 <div class="faq-answer">Boleh, tapi lebih disarankan air hangat.</div>
             </div>
         </div>
+        <div id="dabu" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu Herbal Drink DABU?</div>
+                <div class="faq-answer"><b>Herbal Drink DABU</b> adalah minuman herbal modern berbentuk bubuk instan dengan rasa manis alami, diformulasikan sebagai daily booster untuk membantu menjaga stamina, pencernaan, dan kebugaran tubuh sehari-hari.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b>• Temulawak 35%</b><br>• Jahe merah 25%<br>• Kunyit 20%<br>• Pemanis alami 20%</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat Herbal Drink DABU?</div>
+                <div class="faq-answer"><b>✔ Menjaga Kebugaran:</b> Membantu tubuh tetap terasa fit dan berenergi untuk mendukung produktivitas harian Anda.<br>
+ <b>✔ Nyaman bagi Pencernaan:</b> Memberikan sensasi hangat yang membantu menenangkan dan memberikan rasa nyaman pada perut.<br>
+<b> ✔  Dukungan Alami Tubuh:</b> Membantu mengoptimalkan proses pembersihan alami tubuh agar terasa lebih ringan dan bersih.<br>
+<b> ✔ Pemulihan Kesegaran:</b> Solusi nikmat untuk membantu mengembalikan kesegaran tubuh setelah menjalani aktivitas yang padat.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja aktif<br>• Orang yang sering capek ringan<br>• Yang ingin jaga daya tahan tubuh</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Herbal Drink DABU?</div>
+                <div class="faq-answer"><b>• 3–4 kali</b> per minggu, diminum pagi hari.</div>
+            </div>
+        </div>
+
+        <div id="focca" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu Herbal Drink FOCCA?</div>
+                <div class="faq-answer"><b>Herbal Drink FOCCA</b> adalah minuman herbal modern dengan dominasi Centella (pegagan) yang diformulasikan untuk membantu menenangkan pikiran, menjaga fokus, dan membantu tubuh lebih rileks secara alami. Cocok diminum saat butuh konsentrasi, kerja mental, atau saat pikiran terasa penat.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b> • Centella (pegagan) 35%</b><br> • Jahe 25%<br> • Temulawak 20%<br> • Pemanis alami 20%<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat Herbal Drink FOCCA?</div>
+                <div class="faq-answer"><b>✔ Pikiran Lebih Jernih:</b> Kombinasi bahan alaminya membantu Anda merasa lebih siap dan segar dalam menghadapi tantangan harian.<br>
+ <b>✔ Relaksasi Alami:</b> Efek menenangkan dari Pegagan berpadu dengan hangatnya Jahe, membantu menciptakan momen tenang di sela kesibukan.<br>
+ <b>✔ Redakan Ketegangan:</b> Cocok dinikmati saat jeda kerja untuk membantu melepaskan penat dan menyegarkan kembali perasaan Anda.<br>
+ <b>✔ Kebugaran Menyeluruh:</b> Sinergi Temulawak dan Jahe mendukung kondisi tubuh tetap prima dan terasa ringan sepanjang hari.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja kantoran<br> • Pelajar / mahasiswa<br> • Orang yang sering overthinking ringan</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Herbal Drink FOCCA?</div>
+                <div class="faq-answer"><b>• 2-3 kali</b> per minggu.<br> • Diminum saat butuh fokus atau sore hari</div>
+            </div>
+        </div>
+        
+        <div id="rareco" class="hidden">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa itu Herbal Drink RARECO?</div>
+                <div class="faq-answer"><b>Herbal Drink RARECO</b> adalah minuman herbal pemulih tubuh dengan dominasi jahe merah, dirancang khusus untuk membantu menghangatkan tubuh, mempercepat pemulihan, dan mengurangi rasa pegal setelah aktivitas fisik.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Apa komposisinya?</div>
+                <div class="faq-answer"><b> • Jahe merah 30%</b><br> • Kunyit 25%<br> • Temulawak 25%<br> • Serai 10%<br> • Pemanis alami 10%</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Manfaat Herbal Drink RARECO?</div>
+                <div class="faq-answer"><b>✔ Menghangatkan Tubuh Secara Alami:</b> Memberikan sensasi hangat yang nyaman di tenggorokan dan seluruh tubuh, cocok untuk cuaca dingin atau saat kurang fit.<br>
+ <b>✔ Mendukung Produktivitas Harian:</b> Membantu menjaga kesegaran tubuh agar Anda siap kembali beraktivitas dengan semangat.<br>
+ <b>✔ Relaksasi Alami di Setiap Sesapan:</b> Membantu tubuh terasa lebih rileks dan nyaman setelah seharian bekerja keras.<br>
+ <b>✔ Aroma yang Menenangkan:</b> Ekstrak jahe merah pilihan memberikan aroma khas yang membantu menciptakan rasa tenang.<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Cocok untuk?</div>
+                <div class="faq-answer">• Pekerja lapangan<br> • Olahragawan ringan<br> • Orang yang sering badan pegal & capek<br></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">Aturan minum Herbal Drink RARECO?</div>
+                <div class="faq-answer"><b>• 2-3 kali</b> per minggu.<br>• Diminum setelah aktivitas berat atau malam hari</div>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -547,18 +629,24 @@ function toggleProductFaq(item) {
    FAQ UMUM
 ================================ */
 function toggleFaq(el) {
-  const currentItem = el.parentElement;
-  document.querySelectorAll('.faq-section .faq-item').forEach(item => {
-    if (item !== currentItem) item.classList.remove('active');
+  const item = el.parentElement;
+  const allItems = document.querySelectorAll('.faq-section .faq-item');
+
+  // Tutup semua kecuali yang diklik
+  allItems.forEach(faq => {
+    if (faq !== item) faq.classList.remove('active');
   });
-  currentItem.classList.toggle('active');
+
+  // Toggle yang diklik
+  item.classList.toggle('active');
 }
+
 
 /* ===============================
    TAB PRODUK
 ================================ */
 function showTab(tab, el) {
-  ["umum","dabu","rareco","focca"].forEach(id => {
+  ["umum","dabu","focca","rareco"].forEach(id => {
     const section = document.getElementById(id);
     if (section) section.classList.add("hidden");
   });
